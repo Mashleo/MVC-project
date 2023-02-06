@@ -10,24 +10,35 @@ namespace MVC_Diplom_project.Controllers
 {
     public class CarsController : Controller
     {
-        private readonly ICars _iCars;
-        public CarsController(ICars iCars)
+        public static List<Car> CarsDB = new List<Car>()
+            {
+            new Car { carBrand = "Audi", model = "A6", fuel = "Gas" }
+            //    new Car { carBrand = "VW", model = "T4", fuel = "Gas" },
+            //    new Car { carBrand = "BMW", model = "E34", fuel = "Diesel" },
+            //    new Car { carBrand = "Audi", model = "A4", fuel = "Gas" }
+        };
+       
+        //public CarsController(ICars iCars)
+        //{
+        //    _iCars = iCars;
+        //}
+
+        public IActionResult AllCar()
         {
-            _iCars = iCars;
-        }
+            ViewData["Data"] = DateTime.Now;
         
-        public ViewResult AllCar()
+
+            return View(CarsDB);
+        }
+        //POST
+        [HttpPost]
+        public IActionResult AddCar(Car car)
         {
-            var allCarsInMockClass = _iCars.AllCarrs;
-            
-            return View(allCarsInMockClass);
+            ViewData["Data"] = DateTime.Now;
+            CarsDB.Add(car);
+            return View("AllCar", CarsDB);
         }
        
-        
-        public ActionResult Add()
-        {
-            
-            return View(_iCars.AddCar());
-        }
+
     }
 }

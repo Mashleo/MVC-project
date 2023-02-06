@@ -1,4 +1,5 @@
 ﻿@using MVC_Diplom_project.Data.Models
+@model IEnumerable<Car>
 
 <!DOCTYPE html>
 
@@ -11,14 +12,25 @@
 </head>
 
 <body>
-    
-    @{ foreach (var item in Model)
-        {
-           
-            <li><a href="/Cars/AllCar" class="nav-link px-2 text-secondary">@item.carBrand</a></li>
-        }
+    <form method="post"  asp-controller="Cars" asp-action="AddCar">
+        <label>Brand</label>
+        <input type="text" name="carBrand"/>
+        <label>Model</label>
+        <input type="text" name="model"/>
+        <label>Fuel</label>
+        <input type="text" name="fuel"/>
+        <input type="submit"  title="Add Cars"/>
 
-    }
+    </form> 
+   @foreach (var car in Model)
+   { 
+    <div>
+        <div>Brand @car.carBrand  </div>
+        <div>Model @car.model  </div>
+        <div>Fuel @car.fuel  </div>
+        @*<div>Logbook @car.logbooks  </div>*@
+    </div>
+   }
 
 </body>
 </html>

@@ -10,6 +10,6 @@ namespace MVC_Diplom_project.Data.Models
         public string carBrand { get; set; }
         public string model { get; set; }
         public string fuel { get; set; }
-        public List<Logbooks> logbooks { get; set; }
+        //public List<Logbooks> logbooks { get; set; }
     }
 }
