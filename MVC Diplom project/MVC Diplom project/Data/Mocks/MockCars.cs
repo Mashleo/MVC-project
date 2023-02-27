@@ -9,27 +9,32 @@ namespace MVC_Diplom_project.Data.Mocks
 {
     public class MockCars : ICars
     {
-        
-        public List<Car> AllCarrs
+        public static List<Car> CarsDB = new List<Car>();
+        //= new List<Car>()
+        //    {
+        //    new Car { carBrand = "Audi", model = "A6", fuel = "Gas" },
+        //        new Car { carBrand = "VW", model = "T4", fuel = "Gas" },
+        //        new Car { carBrand = "BMW", model = "E34", fuel = "Diesel" },
+
+        //}
+
+        public List<Car> AllCarrs()
         {
-            get
-            {
-                return new List<Car>
-                {
-                    new Car { carBrand = "Audi", model = "A6", fuel = "Gas" },
-                    new Car { carBrand = "VW", model = "T4", fuel = "Gas" },
-                    new Car { carBrand = "BMW", model = "E34", fuel = "Diesel" },
-                    new Car { carBrand = "Audi", model = "A4", fuel = "Gas" }
-
-
-                };
-            }
+            return CarsDB;
+        }
+        public void AddCar(Car car, string name)
+        {
+            CarsDB.Add(car);
         }
 
-        public Car AddCar()
-        {
-            var car = new Car();
-            return car;
-        }
+
+
+
+
+
+
+
+
+
     }
 }

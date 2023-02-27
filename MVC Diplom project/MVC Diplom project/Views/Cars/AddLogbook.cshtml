@@ -1,0 +1,19 @@
+﻿
+<body>
+    <center><h1>Раскажите о своём опыте всем</h1></center>
+
+    <div class=" row mt-5 mb-2">
+
+        <center>
+            <form method="post" asp-controller="Cars" asp-action="AddLogbook" asp-route-carId="@ViewBag.CarId ">
+                <label>Загололовок</label>
+                <input type="text" name="NameLog" />
+                <label>Текст</label>
+                <input type="text" name="Text" />
+               
+                <input type="submit" title="Add logbook" />
+
+            </form>
+        </center>
+    </div>
+</body>
