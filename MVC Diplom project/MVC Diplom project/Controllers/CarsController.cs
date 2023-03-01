@@ -14,7 +14,7 @@ namespace MVC_Diplom_project.Controllers
     public class CarsController : Controller
     {
 
-     
+
         private readonly ICars _iCars;
         private readonly ILogbook _iLogbook;
 
@@ -27,7 +27,7 @@ namespace MVC_Diplom_project.Controllers
         [Authorize]
         public IActionResult AllCar()
         {
-            
+
             return View(_iCars.AllCarrs());
         }
         [Authorize]
@@ -35,37 +35,40 @@ namespace MVC_Diplom_project.Controllers
         {
             return View();
         }
-        
+
         [HttpPost]
         [Authorize]
         public IActionResult AddCarView(Car car)
         {
             var userAutorizeNmae = User.Identity.Name;
-            _iCars.AddCar(car, userAutorizeNmae);            
+            _iCars.AddCar(car, userAutorizeNmae);
             return RedirectToAction(nameof(AllCar));
         }
-        public IActionResult AddLogbook(Guid carId)
+       
+        [Authorize]
+        public IActionResult AddLogbook([FromRoute] Guid Id)
         {
 
-            ViewBag.CarId = carId;
+            ViewBag.CarId = Id;
             return View();
         }
 
-        [HttpPost]
+        [HttpPost("{carId:guid}")]
         [Authorize]
-        public IActionResult AddLogbook([FromForm]Logbook logbook, [FromQuery] Guid carId)
+        public IActionResult AddLogbook([FromForm]Logbook logbook, [FromRoute] Guid carId)
         {
             var userAutorizeNmae = User.Identity.Name;
            
             
-            _iLogbook.AddLog(logbook, userAutorizeNmae);           
+            _iLogbook.AddLog(logbook, userAutorizeNmae, carId);           
            
             return View();        
         }
-        public IActionResult AllLogbook(Guid carId)
+        [Authorize]
+        public IActionResult AllLogbook( Guid carId)
         {
             ViewBag.CarId = carId;
-            return View(_iCars.AllCarrs());
+            return View(_iLogbook.AllLogbokThisCar(carId));
         }
 
     }

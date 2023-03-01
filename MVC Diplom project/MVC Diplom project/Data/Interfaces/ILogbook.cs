@@ -8,7 +8,7 @@ namespace MVC_Diplom_project.Data.Interfaces
 {
    public interface ILogbook
     {
-        List<Logbook> AllLogbokThisCar();
-        void AddLog( Logbook logbook, string name);
+        List<Logbook> AllLogbokThisCar(Guid id);
+        void AddLog( Logbook logbook, string name, Guid carId );
     }
 }

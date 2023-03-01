@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MVC_Diplom_project.Data;
 //using Microsoft.Extensions.Hosting;
 using MVC_Diplom_project.Data.Interfaces;
-using MVC_Diplom_project.Data.Mocks;
+
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

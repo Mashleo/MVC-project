@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace MVC_Diplom_project.Data.Repository
@@ -17,22 +18,26 @@ namespace MVC_Diplom_project.Data.Repository
             this._appDBContext = appDBContent;
 
         }
-        public void AddLog( Logbook logbook, string name)
+        public void AddLog(Logbook logbook, string name, Guid carId)
         {
-          
-            
+
+
             User user = _appDBContext.Users.FirstOrDefault(u => u.UserName == name);
             Car car = _appDBContext.Cars.FirstOrDefault(u => u.UserId == user.ID);
-          
-                _appDBContext.Logbooks.Add(logbook);
-           
-           
+            logbook.CarId = carId;
+            _appDBContext.Logbooks.Add(logbook);
+            _appDBContext.SaveChanges();
+
+
 
 
         }
 
-        public List<Logbook> AllLogbokThisCar()
+        public List<Logbook> AllLogbokThisCar(Guid carId)
         {
+           
+           
+            Car car =_appDBContext.Cars.Include(x => x.LogbooksList).FirstOrDefault(u => u.Id == carId);
             return _appDBContext.Logbooks.ToList();
         }
     }
