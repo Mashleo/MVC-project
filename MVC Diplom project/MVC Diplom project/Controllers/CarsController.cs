@@ -15,20 +15,24 @@ namespace MVC_Diplom_project.Controllers
     {
 
 
-        private readonly ICars _iCars;
-        private readonly ILogbook _iLogbook;
+        private readonly ICarsRepository _iCarsRepository;
+        private readonly ILogbookRepositiry _iLogbookRepository;
+        private readonly IUserAutorizeRepository _iUserAutorizeRepository;
 
-        public CarsController(ICars iCars, ILogbook iLogbook, IDataProtectionProvider protectionProvider)
+        public CarsController(ICarsRepository iCars, ILogbookRepositiry iLogbook, IUserAutorizeRepository iUserAutorizeRepository)
         {
-            _iCars = iCars;
-            _iLogbook = iLogbook;
+            _iCarsRepository = iCars;
+            _iLogbookRepository = iLogbook;
+            _iUserAutorizeRepository = iUserAutorizeRepository;
 
         }
         [Authorize]
         public IActionResult AllCar()
         {
-
-            return View(_iCars.AllCarrs());
+            ViewBag.NameAutirizeUser = User.Identity.Name;
+            ViewBag.IdUser =  _iUserAutorizeRepository.UserWhoAuturize(User.Identity.Name);
+          
+            return View(_iCarsRepository.AllCarrs());
         }
         [Authorize]
         public IActionResult AddCarView()
@@ -41,7 +45,7 @@ namespace MVC_Diplom_project.Controllers
         public IActionResult AddCarView(Car car)
         {
             var userAutorizeNmae = User.Identity.Name;
-            _iCars.AddCar(car, userAutorizeNmae);
+            _iCarsRepository.AddCar(car, userAutorizeNmae);
             return RedirectToAction(nameof(AllCar));
         }
        
@@ -60,15 +64,15 @@ namespace MVC_Diplom_project.Controllers
             var userAutorizeNmae = User.Identity.Name;
            
             
-            _iLogbook.AddLog(logbook, userAutorizeNmae, carId);           
+            _iLogbookRepository.AddLog(logbook, userAutorizeNmae, carId);           
            
             return View();        
         }
         [Authorize]
-        public IActionResult AllLogbook( Guid carId)
+        public IActionResult AllLogbook([FromRoute] Guid Id)
         {
-            ViewBag.CarId = carId;
-            return View(_iLogbook.AllLogbokThisCar(carId));
+            ViewBag.CarId = Id;
+            return View(_iLogbookRepository.AllLogbokThisCar(Id));
         }
 
     }

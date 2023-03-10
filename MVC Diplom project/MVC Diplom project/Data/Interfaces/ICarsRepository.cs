@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace MVC_Diplom_project.Data.Interfaces
 {
-   public interface ILogbook
+    public interface ICarsRepository
     {
-        List<Logbook> AllLogbokThisCar(Guid id);
-        void AddLog( Logbook logbook, string name, Guid carId );
+        List<Car> AllCarrs();
+        void AddCar(Car car,string name);
+        
+
+
+
     }
 }

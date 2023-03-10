@@ -39,8 +39,9 @@ namespace MVC_Diplom_project
                });
             services.AddControllersWithViews();
             
-            services.AddTransient<ICars, CarRepository>();
-            services.AddTransient<ILogbook, LogbooksRepository>();
+            services.AddTransient<ICarsRepository, CarRepository>();
+            services.AddTransient<ILogbookRepositiry, LogbooksRepository>();
+            services.AddTransient<IUserAutorizeRepository, UserAutorizeRepository>();
             services.AddMvc(options => options.EnableEndpointRouting = false);
         }
 

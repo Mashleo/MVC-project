@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVC_Diplom_project.Migrations
 {
     [DbContext(typeof(CarPortalDBContext))]
-    [Migration("20230224170908_initial23")]
-    partial class initial23
+    [Migration("20230306120852_initial1")]
+    partial class initial1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,6 +55,12 @@ namespace MVC_Diplom_project.Migrations
                     b.Property<Guid>("CarId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("CarId1")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CarId2")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("NameLog")
                         .HasColumnType("nvarchar(max)");
 
@@ -64,6 +70,8 @@ namespace MVC_Diplom_project.Migrations
                     b.HasKey("LogbookId");
 
                     b.HasIndex("CarId");
+
+                    b.HasIndex("CarId1");
 
                     b.ToTable("Logbooks");
                 });
@@ -96,11 +104,15 @@ namespace MVC_Diplom_project.Migrations
 
             modelBuilder.Entity("MVC_Diplom_project.Data.Models.Logbook", b =>
                 {
-                    b.HasOne("MVC_Diplom_project.Data.Models.Car", "Car")
+                    b.HasOne("MVC_Diplom_project.Data.Models.Car", null)
                         .WithMany("LogbooksList")
                         .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("MVC_Diplom_project.Data.Models.Car", "Car")
+                        .WithMany()
+                        .HasForeignKey("CarId1");
                 });
 #pragma warning restore 612, 618
         }

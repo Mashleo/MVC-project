@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MVC_Diplom_project.Data.Repository
 {
-    public class CarRepository : ICars
+    public class CarRepository : ICarsRepository
     {
         private readonly CarPortalDBContext _appDBContext;
         public CarRepository(CarPortalDBContext appDBContent)
@@ -17,6 +17,7 @@ namespace MVC_Diplom_project.Data.Repository
             this._appDBContext = appDBContent;
 
         }
+       
        
         public void AddCar(Car car, string name)
         {
@@ -30,6 +31,7 @@ namespace MVC_Diplom_project.Data.Repository
 
         public  List<Car> AllCarrs()
         {
+
             return _appDBContext.Cars.ToList();
         }
        
