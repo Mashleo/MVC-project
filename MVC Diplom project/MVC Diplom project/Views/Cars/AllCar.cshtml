@@ -1,0 +1,47 @@
+﻿@using MVC_Diplom_project.Data.Models
+@using MVC_Diplom_project.Controllers
+@model IEnumerable<Car>
+
+<body>
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <h1>@ViewBag.NameAutirizeUser</h1>
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                @if (Model != null)
+                {
+                    @foreach (var car in Model)
+                    {
+                        <div>
+                            <div class="col">
+                                <div class="card shadow-sm">
+                                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#55595c" src="/img/logo.png"><img src="/img/logo.png" /></rect></svg>
+                                    <div class="card-body">
+                                        <p class="card-text">Brand: @car.СarBrand</p>
+
+                                        <div>Model: @car.Model  </div>
+                                        <div>Owner(ID): @car.UserId  </div>                                       
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group">
+                                                @if (@ViewBag.IdUser == car.UserId)
+                                                {<button type="button" class="btn btn-sm btn-outline-secondary"><a href="/Cars/Alllogbook/@car.Id">Logbook</a></button>
+                                                 <button type="button" class="btn btn-sm btn-outline-secondary"><a href="/Cars/AddLogbook/@car.Id">Add log</a></button>
+                                                }
+                                                else
+                                                {<button type="button" class="btn btn-sm btn-outline-secondary"><a href="/Cars/Alllogbook/@car.Id">Logbook</a></button>}
+                                            </div>
+                                            <small class="text-muted">Fuel: @car.Fuel</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div>Упс, ничего нет, станьте первым</div>
+                }
+            </div>
+        </div>
+</body>

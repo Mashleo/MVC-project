@@ -1,0 +1,25 @@
+﻿@using MVC_Diplom_project.Data.Models
+@using MVC_Diplom_project.Controllers
+@model Car
+
+
+
+
+<body>
+    <center><h1>Раскажите о своём опыте всем</h1></center>
+
+    <div class=" row mt-5 mb-2">
+        <center>
+            <form method="post" asp-controller="Cars" asp-action="AddCarView">
+                <label>СarBrand</label>
+                <input type="text" name="СarBrand" />
+                <label>Model</label>
+                <input type="text" name="Model" />
+                <label>Fuel</label>
+                <input type="text" name="Fuel" />
+                <input type="submit" title="Add Cars" />
+
+            </form>
+        </center>
+    </div>
+</body>
